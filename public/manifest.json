@@ -1,7 +1,24 @@
 {
   "short_name": "Blend Builders",
   "name": "Blend Builders: Designer Coffee",
-  "icons": [],
+  "icons": [
+    {
+      "src": "logo-black.svg",
+      "type": "image/svg"
+    },
+    {
+      "src": "logo-color.svg",
+      "type": "image/svg"
+    },
+    {
+      "src": "logo-no-background.svg",
+      "type": "image/svg"
+    },
+    {
+      "src": "logo-white.svg",
+      "type": "image/svg"
+    }
+  ],
   "start_url": ".",
   "display": "standalone"
 }
