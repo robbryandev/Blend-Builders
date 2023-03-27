@@ -11,3 +11,26 @@
 .text-shadow {
     text-shadow: #b42c2c 0.1rem 0.1rem;
 }
+
+@media screen and (max-width: 767px) {
+    .logo {
+        --logo-height: 6;
+        width: calc(3vw * var(--logo-height));
+        height: calc(1vh * var(--logo-height));
+        background-image: url("../public/logo-mug.png");
+        background-size: 80%;
+        background-repeat: no-repeat;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .logo {
+        --logo-height: 8;
+        width: calc(3vw * var(--logo-height));
+        height: calc(1vh * var(--logo-height));
+        background-image: url("../public/logo-no-background.svg");
+        background-size: 80%;
+        background-repeat: no-repeat;
+    }
+}
+

@@ -10,9 +10,8 @@ function Home() {
       <main>
         <div
           id="hero"
-          className="w-full h-[40vh] sm:h-[50vh] md:h-[40vh] p-0 m-0 bg-hero"
+          className="w-full h-[30vh] lg:h-[40vh] p-0 m-0 bg-hero pb-12"
         >
-          <div>
             <h1 className="text-2xl md:text-4xl pl-4 pt-2 pb-6 text-white font-semibold text-shadow w-3/5">
               Welcome to Blend Builders, where every cup is a masterpiece!
             </h1>
@@ -27,7 +26,6 @@ function Home() {
               />
               Contact Us
             </a>
-          </div>
         </div>
         <div
           id="menu"
@@ -36,7 +34,7 @@ function Home() {
           <h1 className="text-4xl text-white font-semibold text-center mt-4 text-shadow">
             Menu
           </h1>
-          <div className="flex flex-row flex-wrap w-[80vw] m-auto my-4">
+          <div className="flex flex-row flex-wrap justify-center w-[80vw] m-auto my-4">
             {
               menu.map((item, index) => {
                 return <Coffee key={index} name={item.name} price={item.price} img={item.img} />
