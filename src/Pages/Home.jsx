@@ -1,5 +1,7 @@
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
+import Coffee from "../Components/Coffee";
+import menu from "../menu";
 
 function Home() {
   return (
@@ -34,6 +36,13 @@ function Home() {
           <h1 className="text-4xl text-white font-semibold text-center mt-4 text-shadow">
             Menu
           </h1>
+          <div className="flex flex-row flex-wrap w-[80vw] m-auto my-4">
+            {
+              menu.map((item, index) => {
+                return <Coffee key={index} name={item.name} price={item.price} img={item.img} />
+              })
+            }
+          </div>
         </div>
       </main>
       <Footer />
