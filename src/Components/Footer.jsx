@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="w-full min-h-[20vh] bg-black">
+    <footer id="footer" className="w-full min-h-[20vh] bg-black">
       <p className="text-white text-md p-4">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi
         reprehenderit repellat adipisci soluta quo cum deserunt voluptatem
