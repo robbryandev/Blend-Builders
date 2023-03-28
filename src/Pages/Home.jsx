@@ -2,11 +2,14 @@ import Header from "../Components/Header";
 import Footer from "../Components/Footer";
 import Coffee from "../Components/Coffee";
 import menu from "../menu";
+import { auth } from "../Utils/firebase";
+import {useAuthState} from "react-firebase-hooks/auth";
 
 function Home() {
+  const [user] = useAuthState(auth);
   return (
     <div className="w-full min-h-screen bg-neutral-200">
-      <Header showAuth={true} />
+      <Header showAuth={true} loggedIn={user != null}/>
       <main className="pt-16">
         <div
           id="hero"
@@ -37,7 +40,7 @@ function Home() {
           <div className="flex flex-row flex-wrap justify-center w-[80vw] m-auto my-4">
             {
               menu.map((item, index) => {
-                return <Coffee key={index} name={item.name} price={item.price} img={item.img} />
+                return <Coffee key={index} name={item.name} price={item.price} img={item.img} owner={"robbryandev@gmail.com"} user={user}/>
               })
             }
           </div>

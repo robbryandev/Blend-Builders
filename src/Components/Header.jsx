@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { signOut } from "firebase/auth";
+import { auth } from "../Utils/firebase";
 
 export default function Header(
   props = {
@@ -32,12 +34,14 @@ export default function Header(
             className="text-lg text-white text-shadow"
             type="button"
             onClick={() => {
-              props.loggedIn
-                ? (() => {
-                    console.log("logout");
-                    window.location = "/";
-                  })()
-                : (window.location = "/login");
+              if (props.loggedIn) {
+                signOut(auth)
+                  .catch((err) => {
+                    console.log(err)
+                  })
+              } else {
+                window.location = "/login";
+              }
             }}
           >
             {props.loggedIn ? "Logout" : "Login"}
