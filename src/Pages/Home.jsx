@@ -6,8 +6,8 @@ import menu from "../menu";
 function Home() {
   return (
     <div className="w-full min-h-screen bg-neutral-200">
-      <Header />
-      <main>
+      <Header showAuth={true} />
+      <main className="pt-16">
         <div
           id="hero"
           className="w-full h-[30vh] md:h-[40vh] p-0 m-0 bg-hero pb-12"
