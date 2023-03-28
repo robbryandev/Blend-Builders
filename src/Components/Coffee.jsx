@@ -1,8 +1,11 @@
-import { useCallback, useMemo } from "react";
+import { useCallback } from "react";
 import { Card } from "react-bootstrap";
+import { deleteDoc, doc } from "firebase/firestore";
+import {db} from "../Utils/firebase";
 
 export default function Coffee(props = {
     name: "",
+    id: 0,
     price: 0.00,
     img: "",
     owner: "",
@@ -23,7 +26,14 @@ export default function Coffee(props = {
             <Card.Text className="text-lg text-center text-white">${props.price}</Card.Text>
             {
                 showDelete() ? (
-                    <button>X</button>
+                    <div className="text-center">
+                        <button className="bg-red-900 text-white rounded-md px-[1rem] py-[0.2rem] mt-2" type="button" onClick={() => {
+                            deleteDoc(doc(db, "flavors", props.id))
+                                .catch((err) => {
+                                    console.log(err);
+                                })
+                        }}>X</button>
+                    </div>
                 ) : null
             }
         </Card.Body>

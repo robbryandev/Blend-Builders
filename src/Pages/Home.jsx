@@ -91,6 +91,7 @@ function Home() {
               return (
                 <Coffee
                   key={index}
+                  id={index}
                   name={item.name}
                   price={item.price}
                   img={item.img}
@@ -101,7 +102,7 @@ function Home() {
             })}
             {
               flavors.map((fl) => {
-                return <Coffee key={fl.id} name={fl.name} price={fl.price} img={fl.img} owner={fl.owner} user={user} />
+                return <Coffee key={fl.id} id={fl.id} name={fl.name} price={fl.price} img={fl.img} owner={fl.owner} user={user} />
               })
             }
           </div>
