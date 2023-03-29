@@ -1,21 +1,22 @@
 import { useState } from "react";
-import { collection, doc, DocumentData, getDocs, Query, query, QuerySnapshot, updateDoc, where } from "firebase/firestore"
 import {db} from "../Utils/firebase";
 import {v4} from "uuid";
+import {edit} from "../Pages/Home";
 
 export default function AddCoffee(
   props = {
     user: null
   }
 ) {
-  const [name, setName] = useState("");
-  const [price, setPrice] = useState(0.01);
-  const [img, setImg] = useState("");
+  const [name, setName] = useState(edit.value.show ? edit.value.coffee.name : "");
+  const [price, setPrice] = useState(edit.value.show ? edit.value.coffee.price : 0.01);
+  const [img, setImg] = useState(edit.value.show ? edit.value.coffee.img : "");
 
   const handleAdd = async () => {
     return new Promise((resolve, reject) => {
         const randId = v4()
-        db.collection("flavors").doc(randId).set({
+        const isEdit = edit.value.show;
+        db.collection("flavors").doc(isEdit ? edit.value.coffee.id : randId).set({
           name: name,
           price: price,
           img: img,
@@ -83,7 +84,7 @@ export default function AddCoffee(
           required
         />
         <div className="pt-6">
-            <button className="px-[1.5rem] py-[0.5rem] font-semibold rounded-md bg-black" type="submit">Add</button>
+            <button className="px-[1.5rem] py-[0.5rem] font-semibold rounded-md bg-black" type="submit">{edit.value.show ? "Edit" : "Add"}</button>
         </div>
       </form>
   );

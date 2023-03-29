@@ -7,6 +7,9 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { collection, onSnapshot } from "firebase/firestore";
 import AddCoffee from "../Components/AddCoffee";
 import { useEffect, useState } from "react";
+import { signal } from "@preact/signals-react";
+
+export let edit = signal({show: false, coffee: {}});
 
 function Home() {
   const [user] = useAuthState(auth);
@@ -37,6 +40,10 @@ function Home() {
     });
     return () => unsub();
   }, []);
+
+  useEffect(() => {
+    setShowAdd(edit.value.show)
+  }, [edit.value])
 
   return (
     <div className="w-full min-h-screen bg-neutral-200">
@@ -69,21 +76,24 @@ function Home() {
             Menu
           </h1>
           {user != null ? (
-            <div className="mt-4 text-center">
+            <div id="add-coffee" className="mt-4 text-center">
               <button
                 className="px-[1.5rem] py-[0.5rem] bg-secondary text-white font-semibold rounded-md"
                 type="button"
                 onClick={() => {
+                  if (showAdd) {
+                    edit.value.show = false;
+                  }
                   setShowAdd(showAdd === false);
                 }}
               >
-                New Coffee
+                {showAdd ? "Close" : "New Coffee"}
               </button>
             </div>
           ) : null}
           {showAdd ? (
             <div className="w-4/5 max-w-[400px] m-auto my-4">
-              <AddCoffee user={user} />
+              <AddCoffee user={user}/>
             </div>
           ) : null}
           <div className="flex flex-row flex-wrap justify-center w-[80vw] m-auto my-4">
