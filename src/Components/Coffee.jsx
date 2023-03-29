@@ -2,7 +2,8 @@ import { useCallback } from "react";
 import { Card } from "react-bootstrap";
 import { deleteDoc, doc } from "firebase/firestore";
 import {db} from "../Utils/firebase";
-import {edit} from "../Pages/Home";
+import {edit, cartStore} from "../Pages/Home";
+import { useStore } from "zustand";
 
 export default function Coffee(props = {
     name: "",
@@ -24,8 +25,13 @@ export default function Coffee(props = {
         </div>
         <Card.Body>
             <Card.Title className="pt-2 text-center text-white text-md md:text-xl">{props.name}</Card.Title>
-            <button onClick={() => {
-            }} className="text-lg text-center text-white">${props.price}</button>
+            <div className="p-0 m-0 text-center">
+                <button onClick={() => {
+                    let newCart = {...cartStore.getState().cart}
+                    newCart[props.id] = typeof newCart[props.id] != "undefined"  ? newCart[props.id] + 1 : 1;
+                    cartStore.setState({cart: newCart})
+                }} className="text-lg text-white">${props.price}</button>
+            </div>
             {
                 showDelete() ? (
                     <div className="text-center">

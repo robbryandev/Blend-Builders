@@ -7,8 +7,15 @@ import { collection, onSnapshot } from "firebase/firestore";
 import AddCoffee from "../Components/AddCoffee";
 import { useEffect, useState } from "react";
 import { signal } from "@preact/signals-react";
+import { create, get } from 'zustand'
+
+export const cartStore = create((set) => ({
+  cart: {},
+  setCart: () => set((state, value) => ({ cart: value }))
+}))
 
 export let edit = signal({show: false, coffee: {}});
+
 
 function Home() {
   const [user] = useAuthState(auth);
@@ -46,7 +53,7 @@ function Home() {
 
   return (
     <div className="w-full min-h-screen bg-neutral-200">
-      <Header showAuth={true} loggedIn={user != null} />
+      <Header showAuth={true} loggedIn={user != null}/>
       <main className="pt-16">
         <div
           id="hero"
@@ -69,7 +76,7 @@ function Home() {
         </div>
         <div
           id="menu"
-          className="w-full min-h-[40vh] bg-primary border-y-secondary border-y-4"
+          className="w-full min-h-[40vh] bg-neutral-600 border-y-secondary border-y-4"
         >
           <h1 className="mt-4 text-4xl font-semibold text-center text-white text-shadow">
             Menu
