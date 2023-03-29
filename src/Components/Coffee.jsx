@@ -17,7 +17,7 @@ export default function Coffee(props = {
     }, [props.user])
 
     return (
-    <Card className=" bg-secondary p-4 m-4 rounded-lg shadow-md w-4/12 sm:w-3/12 md:w-1/5 lg:w-2/12 lg:max-w-[15vw]">
+    <Card className=" bg-secondary p-4 m-4 rounded-lg shadow-md w-4/12 sm:w-3/12 md:w-1/5 lg:w-2/12 lg:max-w-[15vw] coffee-card animate__animated animate__zoomIn">
         <div className="relative">
             <Card.Img className="z-10 rounded-md aspect-square" src={props.img != null ? props.img : "#"} />
             <Card.Img alt={`Flavor uploaded by: ${props.owner}`} className="absolute top-0 left-0 z-20 py-4 rounded-sm" src="logo-mug.png" />
