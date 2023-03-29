@@ -1,7 +1,6 @@
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
 import Coffee from "../Components/Coffee";
-import menu from "../menu";
 import { auth, db } from "../Utils/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { collection, onSnapshot } from "firebase/firestore";
@@ -97,19 +96,6 @@ function Home() {
             </div>
           ) : null}
           <div className="flex flex-row flex-wrap justify-center w-[80vw] m-auto my-4">
-            {menu.map((item, index) => {
-              return (
-                <Coffee
-                  key={index}
-                  id={index}
-                  name={item.name}
-                  price={item.price}
-                  img={item.img}
-                  owner={"robbryandev@gmail.com"}
-                  user={user}
-                />
-              );
-            })}
             {
               flavors.map((fl) => {
                 return <Coffee key={fl.id} id={fl.id} name={fl.name} price={fl.price} img={fl.img} owner={fl.owner} user={user} />

@@ -24,7 +24,8 @@ export default function Coffee(props = {
         </div>
         <Card.Body>
             <Card.Title className="pt-2 text-center text-white text-md md:text-xl">{props.name}</Card.Title>
-            <Card.Text className="text-lg text-center text-white">${props.price}</Card.Text>
+            <button onClick={() => {
+            }} className="text-lg text-center text-white">${props.price}</button>
             {
                 showDelete() ? (
                     <div className="text-center">
