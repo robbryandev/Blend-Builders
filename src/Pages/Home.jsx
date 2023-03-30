@@ -7,7 +7,7 @@ import { collection, onSnapshot } from "firebase/firestore";
 import AddCoffee from "../Components/AddCoffee";
 import { useEffect, useState } from "react";
 import CartDisplay from "../Components/CartDisplay";
-import { editStore } from "../Utils/Stores";
+import { cartStore, editStore } from "../Utils/Stores";
 
 function Home() {
   const [user] = useAuthState(auth);

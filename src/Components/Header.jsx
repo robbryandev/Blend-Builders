@@ -21,9 +21,10 @@ export default function Header(
   const [mobile, setMobile] = useState(isMobile());
   useEffect(() => {
     window.addEventListener("resize", () => setMobile(isMobile()));
-    return () =>
+    return () => {
       window.removeEventListener("resize", () => setMobile(isMobile()));
-  });
+    }
+  }, []);
 
   function getCount(cartVal) {
     const keys = Object.keys(cartVal);
@@ -76,7 +77,7 @@ export default function Header(
           >
             <BsFillCartFill />
             <span className="px-[0.3rem] py-[0.1rem] bg-black rounded-full text-sm icon relative bottom-10 left-4">
-              {getCount(cart.cart)}
+              {getCount(cartStore.getState().cart)}
             </span>
           </button>
         </div>
