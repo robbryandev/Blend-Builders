@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useStore } from "zustand";
 import { cartStore } from "../Utils/Stores";
 import { v4 } from "uuid";
@@ -13,7 +14,12 @@ export default function CartDisplay(
     <>
     {
       keys.length > 0 ? (
-        <div className="px-0.5 py-[0.1rem] bg-black">
+        <div className="px-0.5 py-[0.1rem] bg-black text-white text-center">
+          <p>Total ${props.flavors.reduce((result, val, index) => {
+            let newResult = result;
+            newResult += keys.includes(props.flavors[index].id) ? (props.flavors[index].price * cart.cart[props.flavors[index].id]) : 0;
+            return newResult;
+          }, 0).toFixed(2)}</p>
           {props.flavors.map((fl) => {
             let valid = false;
             if (keys.includes(fl.id)) {
@@ -28,7 +34,7 @@ export default function CartDisplay(
               return (
                 <div
                   key={v4()}
-                  className="w-full my-1 space-x-2 font-semibold text-white bg-primary"
+                  className="w-full my-1 space-x-2 font-semibold bg-primary"
                 >
                   <img
                     src={fl.img}
