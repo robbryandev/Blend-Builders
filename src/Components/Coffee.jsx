@@ -29,7 +29,7 @@ export default function Coffee(props = {
                 <button onClick={() => {
                     let newCart = {...cartStore.getState().cart}
                     newCart[props.id] = typeof newCart[props.id] != "undefined"  ? newCart[props.id] + 1 : 1;
-                    cartStore.setState({cart: newCart})
+                    cartStore.setState({cart: newCart, hide: false})
                 }} className="text-lg text-white">${props.price}</button>
             </div>
             {

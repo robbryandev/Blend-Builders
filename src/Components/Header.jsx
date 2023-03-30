@@ -5,6 +5,14 @@ import { BsFillCartFill } from "react-icons/bs";
 import { cartStore } from "../Utils/Stores";
 import { useStore } from "zustand";
 
+export function getCount(cartVal) {
+  const keys = Object.keys(cartVal);
+  let result = 0;
+  for (let i = 0; i < keys.length; i++) {
+    result += cartVal[keys[i]];
+  }
+  return result;
+}
 export default function Header(
   props = {
     loggedIn: false,
@@ -19,21 +27,14 @@ export default function Header(
     return window.innerWidth < 768 ? true : false;
   };
   const [mobile, setMobile] = useState(isMobile());
+
+
   useEffect(() => {
     window.addEventListener("resize", () => setMobile(isMobile()));
     return () => {
       window.removeEventListener("resize", () => setMobile(isMobile()));
     }
   }, []);
-
-  function getCount(cartVal) {
-    const keys = Object.keys(cartVal);
-    let result = 0;
-    for (let i = 0; i < keys.length; i++) {
-      result += cartVal[keys[i]];
-    }
-    return result;
-  }
 
   return (
     <header className="fixed z-30 w-screen py-4 border-b-4 bg-primary border-b-secondary">
@@ -70,7 +71,7 @@ export default function Header(
           <button
             className="inline text-lg text-white"
             onClick={() => {
-              if (getCount(cart.cart) > 0) {
+              if (getCount(cartStore.getState().cart) > 0) {
                 props.setShowCart(props.showCart === false);
               }
             }}

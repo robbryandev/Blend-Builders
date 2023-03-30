@@ -8,6 +8,7 @@ import AddCoffee from "../Components/AddCoffee";
 import { useEffect, useState } from "react";
 import CartDisplay from "../Components/CartDisplay";
 import { cartStore, editStore } from "../Utils/Stores";
+import { getCount } from "../Components/Header";
 
 function Home() {
   const [user] = useAuthState(auth);
@@ -25,7 +26,6 @@ function Home() {
     const unsub = onSnapshot(collection(db, "flavors"), (snap) => {
       const flavs = [];
       snap.forEach((flav) => {
-        console.log("new flavor");
         const flavData = flav.data();
         flavs.push({
           name: flavData.name,
@@ -36,6 +36,12 @@ function Home() {
         });
       });
       setFlavors(flavs);
+    });
+    cartStore.subscribe((val) => {
+      const newCount = getCount(val.cart);
+      if (newCount === 0) {
+        setShowCart(false)
+      }
     });
     editStore.subscribe((val, old) => {
       if (val.show != old.show) {
