@@ -6,16 +6,17 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { collection, onSnapshot } from "firebase/firestore";
 import AddCoffee from "../Components/AddCoffee";
 import { useEffect, useState } from "react";
-import { signal } from "@preact/signals-react";
-import { create, get } from 'zustand'
+import { create } from 'zustand'
 import CartDisplay from "../Components/CartDisplay";
 
 export const cartStore = create((set) => ({
-  cart: {},
-  setCart: () => set((state, value) => ({ cart: value }))
+  cart: {}
 }))
 
-export let edit = signal({show: false, coffee: {}});
+export const editStore = create((set) => ({
+  show: false,
+  coffee: {}
+}))
 
 
 function Home() {
@@ -45,12 +46,13 @@ function Home() {
       });
       setFlavors(flavs);
     });
+    editStore.subscribe((val, old) => {
+      if (val.show != old.show) {
+        setShowAdd(val.show);
+      }
+    })
     return () => unsub();
   }, []);
-
-  useEffect(() => {
-    setShowAdd(edit.value.show)
-  }, [edit.value])
 
   return (
     <div className="w-full min-h-screen bg-neutral-200">
@@ -92,7 +94,7 @@ function Home() {
                 type="button"
                 onClick={() => {
                   if (showAdd) {
-                    edit.value.show = false;
+                    editStore.getState().show = false;
                   }
                   setShowAdd(showAdd === false);
                 }}
