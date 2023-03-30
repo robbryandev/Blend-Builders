@@ -10,19 +10,19 @@ export default function CartDisplay(
     const cart = useStore(cartStore);
   const keys = Object.keys(cart.cart);
   return (
-    <div className="bg-black">
+    <div className="px-0.5 py-[0.1rem] bg-black">
       {props.flavors.map((fl) => {
         const valid = keys.includes(fl.id);
         if (valid) {
           return (
-            <div key={v4()} className="w-10/12 bg-primary">
+            <div key={v4()} className="w-full my-1 space-x-2 font-semibold text-white bg-primary">
               <img
                 src={fl.img}
                 alt={fl.name}
-                className="object-fill w-20 h-auto aspect-square"
+                className="inline object-fill w-12 h-auto p-2 aspect-square"
               />
-              <p>{fl.name}</p>
-              <p>{cart.cart[fl.id]}</p>
+              <p className="inline">{fl.name}</p>
+              <p className="inline">{cart.cart[fl.id]}</p>
             </div>
           );
         }

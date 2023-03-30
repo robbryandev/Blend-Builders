@@ -75,7 +75,7 @@ function Home() {
             Contact Us
           </a>
         </div>
-        <div className="w-3/5 max-w-[350px]">
+        <div className="w-3/5 max-w-[200px] z-30 fixed top-20 right-6">
           <CartDisplay flavors={flavors} />
         </div>
         <div
