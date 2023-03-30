@@ -44,7 +44,7 @@ export default function CartDisplay(
               className="inline object-fill w-12 h-auto p-2 aspect-square"
             />
             <p className="inline">{fl.name}</p>
-            <p className="inline">{cart.cart[fl.id]}</p>
+            <p className="inline">{fl.price} * {cart.cart[fl.id]}</p>
             <button
               className="inline px-[0.5rem] font-bold ml-4 bg-secondary rounded-full"
               onClick={() => {

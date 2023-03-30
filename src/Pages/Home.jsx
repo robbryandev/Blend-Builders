@@ -79,7 +79,7 @@ function Home() {
             Contact Us
           </a>
         </div>
-        <div className="w-3/5 max-w-[200px] z-30 fixed top-20 right-6">
+        <div className="w-4/5 max-w-[260px] z-30 fixed top-20 right-6">
           {showCart ? <CartDisplay flavors={flavors} /> : null}
         </div>
         <div
