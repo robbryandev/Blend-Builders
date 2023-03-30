@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { Card } from "react-bootstrap";
 import { deleteDoc, doc } from "firebase/firestore";
 import {db} from "../Utils/firebase";
-import {editStore, cartStore} from "../Pages/Home";
+import {editStore, cartStore} from "../Utils/Stores";
 import { useStore } from "zustand";
 
 export default function Coffee(props = {

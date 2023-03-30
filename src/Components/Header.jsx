@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { signOut } from "firebase/auth";
 import { auth } from "../Utils/firebase";
 import { BsFillCartFill } from "react-icons/bs";
-import { cartStore } from "../Pages/Home";
+import { cartStore } from "../Utils/Stores";
 import { useStore } from "zustand";
 
 export default function Header(

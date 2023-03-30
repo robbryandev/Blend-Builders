@@ -1,7 +1,7 @@
 import { useState } from "react";
 import {db} from "../Utils/firebase";
 import {v4} from "uuid";
-import {editStore} from "../Pages/Home";
+import {editStore} from "../Utils/Stores";
 
 export default function AddCoffee(
   props = {

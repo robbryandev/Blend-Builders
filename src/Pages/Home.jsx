@@ -6,18 +6,8 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { collection, onSnapshot } from "firebase/firestore";
 import AddCoffee from "../Components/AddCoffee";
 import { useEffect, useState } from "react";
-import { create } from 'zustand'
 import CartDisplay from "../Components/CartDisplay";
-
-export const cartStore = create((set) => ({
-  cart: {}
-}))
-
-export const editStore = create((set) => ({
-  show: false,
-  coffee: {}
-}))
-
+import { editStore } from "../Utils/Stores";
 
 function Home() {
   const [user] = useAuthState(auth);

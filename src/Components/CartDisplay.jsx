@@ -1,5 +1,5 @@
 import { useStore } from "zustand";
-import { cartStore } from "../Pages/Home";
+import { cartStore } from "../Utils/Stores";
 import {v4} from "uuid";
 
 export default function CartDisplay(
