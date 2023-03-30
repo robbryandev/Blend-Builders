@@ -13,6 +13,7 @@ function Home() {
   const [user] = useAuthState(auth);
   const [flavors, setFlavors] = useState([]);
   const [showAdd, setShowAdd] = useState(false);
+  const [showCart, setShowCart] = useState(false);
 
   useEffect(() => {
     if (user == null) {
@@ -46,7 +47,7 @@ function Home() {
 
   return (
     <div className="w-full min-h-screen bg-neutral-200">
-      <Header showAuth={true} loggedIn={user != null}/>
+      <Header showAuth={true} loggedIn={user != null} showCart={showCart} setShowCart={setShowCart}/>
       <main className="pt-16">
         <div
           id="hero"
@@ -68,7 +69,11 @@ function Home() {
           </a>
         </div>
         <div className="w-3/5 max-w-[200px] z-30 fixed top-20 right-6">
-          <CartDisplay flavors={flavors} />
+          {
+            showCart ? (
+              <CartDisplay flavors={flavors} />
+            ) : null
+          }
         </div>
         <div
           id="menu"

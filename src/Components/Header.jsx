@@ -8,10 +8,12 @@ import { useStore } from "zustand";
 export default function Header(
   props = {
     loggedIn: false,
-    showAuth: true
+    showAuth: true,
+    showCart: false,
+    setShowCart: (val) => {},
   }
 ) {
-  const cart = useStore(cartStore)
+  const cart = useStore(cartStore);
 
   const isMobile = () => {
     return window.innerWidth < 768 ? true : false;
@@ -27,7 +29,7 @@ export default function Header(
     const keys = Object.keys(cartVal);
     let result = 0;
     for (let i = 0; i < keys.length; i++) {
-      result += cartVal[keys[i]]
+      result += cartVal[keys[i]];
     }
     return result;
   }
@@ -64,9 +66,18 @@ export default function Header(
       ) : null}
       {props.showAuth ? (
         <div className="absolute top-6 right-16">
-          <button className="inline text-lg text-white">
+          <button
+            className="inline text-lg text-white"
+            onClick={() => {
+              if (getCount(cart.cart) > 0) {
+                props.setShowCart(props.showCart === false);
+              }
+            }}
+          >
             <BsFillCartFill />
-            <span className="px-[0.3rem] py-[0.1rem] bg-black rounded-full text-sm icon relative bottom-10 left-4">{getCount(cart.cart)}</span>
+            <span className="px-[0.3rem] py-[0.1rem] bg-black rounded-full text-sm icon relative bottom-10 left-4">
+              {getCount(cart.cart)}
+            </span>
           </button>
         </div>
       ) : null}
