@@ -1,10 +1,10 @@
-import { create } from 'zustand';
+import { create } from "zustand";
 
 export const cartStore = create((set) => ({
-  cart: {}
+  cart: {},
 }));
 
 export const editStore = create((set) => ({
   show: false,
-  coffee: {}
+  coffee: {},
 }));

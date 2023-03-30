@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useStore } from "zustand";
 import { cartStore } from "../Utils/Stores";
 import { v4 } from "uuid";
@@ -34,32 +33,30 @@ export default function CartDisplay(
             cartStore.setState(removeCoffee, true);
           }
         }
-        if (valid) {
-          return (
-            <div
-              key={v4()}
-              className="w-full my-1 space-x-2 font-semibold bg-primary"
+        return valid ? (
+          <div
+            key={v4()}
+            className="w-full my-1 space-x-2 font-semibold bg-primary"
+          >
+            <img
+              src={fl.img}
+              alt={fl.name}
+              className="inline object-fill w-12 h-auto p-2 aspect-square"
+            />
+            <p className="inline">{fl.name}</p>
+            <p className="inline">{cart.cart[fl.id]}</p>
+            <button
+              className="inline px-[0.5rem] font-bold ml-4 bg-secondary rounded-full"
+              onClick={() => {
+                let newCart = cart.cart;
+                newCart[fl.id] -= 1;
+                cartStore.setState({ cart: newCart }, true);
+              }}
             >
-              <img
-                src={fl.img}
-                alt={fl.name}
-                className="inline object-fill w-12 h-auto p-2 aspect-square"
-              />
-              <p className="inline">{fl.name}</p>
-              <p className="inline">{cart.cart[fl.id]}</p>
-              <button
-                className="inline px-[0.5rem] font-bold ml-4 bg-secondary rounded-full"
-                onClick={() => {
-                  let newCart = cart.cart;
-                  newCart[fl.id] -= 1;
-                  cartStore.setState({ cart: newCart }, true);
-                }}
-              >
-                -
-              </button>
-            </div>
-          );
-        }
+              -
+            </button>
+          </div>
+        ) : null;
       })}
     </div>
   );

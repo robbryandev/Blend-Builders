@@ -32,7 +32,7 @@ function Home() {
           price: flavData.price,
           img: flavData.img,
           id: flav.id,
-          owner: flavData.owner
+          owner: flavData.owner,
         });
       });
       setFlavors(flavs);
@@ -40,20 +40,25 @@ function Home() {
     cartStore.subscribe((val) => {
       const newCount = getCount(val.cart);
       if (newCount === 0) {
-        setShowCart(false)
+        setShowCart(false);
       }
     });
     editStore.subscribe((val, old) => {
-      if (val.show != old.show) {
+      if (val.show !== old.show) {
         setShowAdd(val.show);
       }
-    })
+    });
     return () => unsub();
   }, []);
 
   return (
     <div className="w-full min-h-screen bg-neutral-200">
-      <Header showAuth={true} loggedIn={user != null} showCart={showCart} setShowCart={setShowCart}/>
+      <Header
+        showAuth={true}
+        loggedIn={user != null}
+        showCart={showCart}
+        setShowCart={setShowCart}
+      />
       <main className="pt-16">
         <div
           id="hero"
@@ -75,11 +80,7 @@ function Home() {
           </a>
         </div>
         <div className="w-3/5 max-w-[200px] z-30 fixed top-20 right-6">
-          {
-            showCart ? (
-              <CartDisplay flavors={flavors} />
-            ) : null
-          }
+          {showCart ? <CartDisplay flavors={flavors} /> : null}
         </div>
         <div
           id="menu"
@@ -106,15 +107,23 @@ function Home() {
           ) : null}
           {showAdd ? (
             <div className="w-4/5 max-w-[400px] m-auto my-4">
-              <AddCoffee user={user}/>
+              <AddCoffee user={user} />
             </div>
           ) : null}
           <div className="flex flex-row flex-wrap justify-center w-[80vw] m-auto my-4">
-            {
-              flavors.map((fl) => {
-                return <Coffee key={fl.id} id={fl.id} name={fl.name} price={fl.price} img={fl.img} owner={fl.owner} user={user} />
-              })
-            }
+            {flavors.map((fl) => {
+              return (
+                <Coffee
+                  key={fl.id}
+                  id={fl.id}
+                  name={fl.name}
+                  price={fl.price}
+                  img={fl.img}
+                  owner={fl.owner}
+                  user={user}
+                />
+              );
+            })}
           </div>
         </div>
       </main>
