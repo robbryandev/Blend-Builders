@@ -31,6 +31,9 @@ export default function AddCoffee(
           owner: props.user.email,
         })
         .then((res) => {
+          setName("");
+          setPrice(0.01);
+          setImg("");
           resolve(res);
         })
         .catch((err) => {
