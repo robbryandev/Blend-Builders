@@ -8,6 +8,7 @@ import AddCoffee from "../Components/AddCoffee";
 import { useEffect, useState } from "react";
 import { signal } from "@preact/signals-react";
 import { create, get } from 'zustand'
+import CartDisplay from "../Components/CartDisplay";
 
 export const cartStore = create((set) => ({
   cart: {},
@@ -73,6 +74,9 @@ function Home() {
             />
             Contact Us
           </a>
+        </div>
+        <div className="w-3/5 max-w-[350px]">
+          <CartDisplay flavors={flavors} />
         </div>
         <div
           id="menu"

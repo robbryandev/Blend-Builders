@@ -64,10 +64,10 @@ export default function Header(
       ) : null}
       {props.showAuth ? (
         <div className="absolute top-6 right-16">
-          <a href="/cart" className="inline text-lg text-white">
+          <button className="inline text-lg text-white">
             <BsFillCartFill />
-            <span className="px-[0.3rem] py-[0.1rem] bg-black rounded-full text-sm icon relative bottom-10 left-4">{getCount(cartStore.getState().cart)}</span>
-          </a>
+            <span className="px-[0.3rem] py-[0.1rem] bg-black rounded-full text-sm icon relative bottom-10 left-4">{getCount(cart.cart)}</span>
+          </button>
         </div>
       ) : null}
     </header>
