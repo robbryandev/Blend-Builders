@@ -1,22 +1,22 @@
 import { useState } from "react";
 import {db} from "../Utils/firebase";
 import {v4} from "uuid";
-import {edit} from "../Pages/Home";
+import {editStore} from "../Pages/Home";
 
 export default function AddCoffee(
   props = {
     user: null
   }
 ) {
-  const [name, setName] = useState(edit.value.show ? edit.value.coffee.name : "");
-  const [price, setPrice] = useState(edit.value.show ? edit.value.coffee.price : 0.01);
-  const [img, setImg] = useState(edit.value.show ? edit.value.coffee.img : "");
+  const [name, setName] = useState(editStore.getState().show ? editStore.getState().coffee.name : "");
+  const [price, setPrice] = useState(editStore.getState().show ? editStore.getState().coffee.price : 0.01);
+  const [img, setImg] = useState(editStore.getState().show ? editStore.getState().coffee.img : "");
 
   const handleAdd = async () => {
     return new Promise((resolve, reject) => {
         const randId = v4()
-        const isEdit = edit.value.show;
-        db.collection("flavors").doc(isEdit ? edit.value.coffee.id : randId).set({
+        const isEdit = editStore.getState().show;
+        db.collection("flavors").doc(isEdit ? editStore.getState().coffee.id : randId).set({
           name: name,
           price: price,
           img: img,
@@ -84,7 +84,7 @@ export default function AddCoffee(
           required
         />
         <div className="pt-6">
-            <button className="px-[1.5rem] py-[0.5rem] font-semibold rounded-md bg-black" type="submit">{edit.value.show ? "Edit" : "Add"}</button>
+            <button className="px-[1.5rem] py-[0.5rem] font-semibold rounded-md bg-black" type="submit">{editStore.getState().show ? "Edit" : "Add"}</button>
         </div>
       </form>
   );

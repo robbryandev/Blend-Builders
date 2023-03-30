@@ -14,7 +14,7 @@ Mock website for a fake designer coffee brand
 * Animate.css
 * Javascript
 * React
-* Signals
+* Zustand
 
 ## Setup/Installation Requirements
 

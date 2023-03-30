@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { Card } from "react-bootstrap";
 import { deleteDoc, doc } from "firebase/firestore";
 import {db} from "../Utils/firebase";
-import {edit, cartStore} from "../Pages/Home";
+import {editStore, cartStore} from "../Pages/Home";
 import { useStore } from "zustand";
 
 export default function Coffee(props = {
@@ -36,7 +36,7 @@ export default function Coffee(props = {
                 showDelete() ? (
                     <div className="text-center">
                         <button className="bg-primary mr-2 text-white rounded-md px-[1rem] py-[0.2rem] mt-2" type="button" onClick={() => {
-                            edit.value = {show: true, coffee: {name: props.name, price: props.price, img: props.img, id: props.id}}
+                            editStore.setState({show: true, coffee: {name: props.name, price: props.price, img: props.img, id: props.id}})
                             window.location = "/#add-coffee"
                         }}>Edit</button>
                         <button className="bg-red-900 text-white rounded-md px-[1rem] py-[0.2rem] mt-2" type="button" onClick={() => {
