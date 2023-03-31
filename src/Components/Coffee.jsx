@@ -43,7 +43,9 @@ export default function Coffee(
                 typeof newCart[props.id] != "undefined"
                   ? newCart[props.id] + 1
                   : 1;
-              cartStore.setState({ cart: newCart, hide: false });
+              if (!cartStore.getState().done) {
+                cartStore.setState({ cart: newCart, hide: false });
+              }
             }}
             className="text-lg text-white"
           >

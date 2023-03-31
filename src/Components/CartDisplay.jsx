@@ -1,4 +1,5 @@
 import { useStore } from "zustand";
+import { useState } from "react";
 import { cartStore } from "../Utils/Stores";
 import { v4 } from "uuid";
 
@@ -7,6 +8,7 @@ export default function CartDisplay(
     flavors: [],
   }
 ) {
+  const [summary, setSummary] = useState(false);
   const cart = useStore(cartStore);
   let keys = Object.keys(cart.cart);
   return (
@@ -44,20 +46,47 @@ export default function CartDisplay(
               className="inline object-fill w-12 h-auto p-2 aspect-square"
             />
             <p className="inline">{fl.name}</p>
-            <p className="inline">{fl.price} * {cart.cart[fl.id]}</p>
-            <button
-              className="inline px-[0.5rem] font-bold ml-4 bg-secondary rounded-full"
-              onClick={() => {
-                let newCart = cart.cart;
-                newCart[fl.id] -= 1;
-                cartStore.setState({ cart: newCart }, true);
-              }}
-            >
-              -
-            </button>
+            <p className="inline">
+              {summary
+                ? `${fl.price * cart.cart[fl.id]}`
+                : `${fl.price} * ${cart.cart[fl.id]}`}
+            </p>
+            {summary ? null : (
+              <button
+                className="inline px-[0.5rem] font-bold ml-4 bg-secondary rounded-full"
+                onClick={() => {
+                  let newCart = cart.cart;
+                  newCart[fl.id] -= 1;
+                  cartStore.setState({ cart: newCart }, true);
+                }}
+              >
+                -
+              </button>
+            )}
           </div>
         ) : null;
       })}
+      {
+        summary ? (
+          <button
+          onClick={() => {
+            setSummary(false);
+            cartStore.setState({cart: {}, hide: true, done: false})
+          }}
+          >
+            Close
+          </button>
+        ) : (
+          <button
+            onClick={() => {
+              setSummary(true);
+              cartStore.setState({cart: cart.cart, done: true})
+            }}
+          >
+            Buy
+          </button>
+        )
+      }
     </div>
   );
 }
